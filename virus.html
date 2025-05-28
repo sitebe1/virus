@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>ALERTE VIRUS !</title>
+<style>
+  body {
+    background: black;
+    color: red;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    font-size: 4em;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+  p {
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <h1>⚠️ VIRUS DÉTECTÉ ! ⚠️</h1>
+  <p>Votre appareil est infecté.<br>Contactez immédiatement le support technique.</p>
+  <audio autoplay loop>
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg" />
+  </audio>
+</body>
+</html>
