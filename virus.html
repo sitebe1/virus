@@ -2,38 +2,111 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<title>ALERTE VIRUS !</title>
+<title>⚠️ VIRUS DÉTECTÉ ! ⚠️</title>
 <style>
-  body {
+  html, body {
+    margin: 0; padding: 0; height: 100%;
     background: black;
     color: red;
     font-family: 'Courier New', monospace;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    flex-direction: column;
+  }
+  #fullscreen-btn {
+    background: red;
+    color: black;
+    border: none;
+    padding: 20px 40px;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    animation: pulse 1.5s infinite alternate;
+    user-select: none;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px red; }
+    100% { box-shadow: 0 0 40px red; }
   }
   h1 {
-    font-size: 4em;
-    animation: blink 1s infinite;
+    font-size: 5em;
+    animation: flicker 1s infinite;
+    margin-top: 20px;
+    user-select: none;
   }
-  @keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
   }
   p {
     font-size: 1.5em;
-    margin-top: 20px;
+    margin-top: 10px;
+    user-select: none;
+    text-align: center;
   }
 </style>
 </head>
 <body>
-  <h1>⚠️ VIRUS DÉTECTÉ ! ⚠️</h1>
-  <p>Votre appareil est infecté.<br>Contactez immédiatement le support technique.</p>
-  <audio autoplay loop>
-    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg" />
-  </audio>
+
+<button id="fullscreen-btn">CLIQUEZ ICI POUR DÉCLENCHER LE VIRUS</button>
+
+<h1 style="display:none;">⚠️ VIRUS DÉTECTÉ ! ⚠️</h1>
+<p style="display:none;">
+  Votre appareil est gravement infecté.<br>
+  Contactez immédiatement le support technique.<br>
+  Ne fermez pas cette page !
+</p>
+
+<audio id="alarm-sound" loop>
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg" />
+</audio>
+<audio id="beep-sound" loop>
+  <source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  const btn = document.getElementById('fullscreen-btn');
+  const alarmSound = document.getElementById('alarm-sound');
+  const beepSound = document.getElementById('beep-sound');
+  const title = document.querySelector('h1');
+  const message = document.querySelector('p');
+
+  // Fonction pour activer le mode plein écran
+  function launchFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if(element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }
+
+  btn.onclick = () => {
+    launchFullscreen(document.documentElement);
+
+    // Affiche le message
+    btn.style.display = 'none';
+    title.style.display = 'block';
+    message.style.display = 'block';
+
+    // Lance les sons forts
+    alarmSound.volume = 0.7;
+    beepSound.volume = 0.3;
+    alarmSound.play();
+    beepSound.play();
+
+    // Lance des alertes pop-up toutes les 10 secondes
+    setInterval(() => {
+      alert("⚠️ ATTENTION ! VIRUS EN COURS DE PROPAGATION !");
+    }, 10000);
+  };
+</script>
+
 </body>
 </html>
